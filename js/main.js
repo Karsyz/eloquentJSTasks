@@ -124,48 +124,30 @@
 //   console.log(twice(5));
 //   // → 10
 
-
-
-//  find position of first letter of each word in a string and capitalize
-// function upper (str) {
-//   let newString = ""
-//   for (i = 0; i < str.length; i++) {
-//     if (i === 0) {
-//       newString += str.charAt(i).toUpperCase()
-//     }else if (str.charAt(i) === " ") {
-//       newString += str.charAt(i)
-//       newString += str.charAt(i + 1).toUpperCase()
-//       i++
-//     }else {
-//       newString += str.charAt(i)
-//     }
-//   }
-//   console.log(newString)
-// }
-  
-  // str.charAt(i).toUpperCase()
-
-  // str.charAt(0).toUpperCase()
-
-// upper("Abcd  efgh ijkl mnop qrst uvwx yz")
-
-//  find position of first letter of each word in a string and capitalize
-String.prototype.toJadenCase = function () {
-  let newString = ""
-for (i = 0; i < this.length; i++) {
-  if (i === 0) {
-    newString += this.charAt(i).toUpperCase()
-  }else if (this.charAt(i) === " ") {
-    newString += this.charAt(i)
-    newString += this.charAt(i + 1).toUpperCase()
-    i++
-  }else {
-    newString += this.charAt(i)
+function findSolution(target) {
+  function find(current, history) {
+    if (current == target) {
+      return history;
+    } else if (current > target) {
+      return null;
+    } else {
+      return find(current + 5, `(${history} + 5)`) ||
+             find(current * 3, `(${history} * 3)`);
+    }
   }
-}
-  return newString
+  return find(1, "1");
 }
 
-let uppercased = "Abcd efgh ijkl mnop qrst uvwx yz".toJadenCase()
+console.log(findSolution(24));
+// → (((1 * 3) + 5) * 3)
 
-console.log(uppercased)
+target = 24
+current, history
+// starting numbers from return find(1,"1")
+1, "1"
+// add 5
+6, "(1 + 5)" //too low
+// add 5
+(11, "(1 + 5 + 5") // too low
+// add 5
+(16, "1 + 5 + 5 + 5") // too low
